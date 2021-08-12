@@ -1,59 +1,67 @@
-import pygame, sys, os
+import pygame, sys, os, time
 from pygame.locals import *
 
-all_sprites = pygame.sprite.Group()
+class Clicker(pygame.sprite.Sprite):
+
+    def __init__(self):
+        super().__init__()
+        clicker_surface = pygame.image.load('assets/f_citrus.png').convert_alpha()
+        self.image = clicker_surface
+        self.rect = self.image.get_rect()
+
+    def handle_event(self, event):
+        global money, active_cps, clicking
+
+        if event.type == pygame.MOUSEBUTTONDOWN and self.rect.collidepoint(event.pos):
+            clicking = True
+            
+        if event.type == pygame.MOUSEBUTTONUP and clicking == True:
+            if self.rect.collidepoint(event.pos):
+                money += active_cps
+                print(money)
+            clicking = False
+
+    def update(self):
+        self.handle_event(event)
+
+#class Button(pygame.sprite.Sprite):
+
+#def display_score():
+
 pygame.init()
 screen = pygame.display.set_mode((640,480))
 pygame.display.set_caption('Citrus Clicker')
 clock = pygame.time.Clock()
+test_font = pygame.font.Font('font/Pixeltype.ttf', 50)
+game_active = True
 
-#loading in images
-bg_surface = pygame.image.load('assets/background.jpg').convert()
-
-#orange clicker
-clicker_surface = pygame.image.load('assets/f_citrus.png').convert_alpha()
-
-class Clicker(pygame.sprite.Sprite):
-
-    def __init__(self,width,height):
-        super().__init__(all_sprites)
-        self.image = clicker_surface
-        self.rect = self.image.get_rect()
-
-    def draw(self):
-        screen.blit(self.image,self.rect)
-
-
+clicking = False
 money = 0
 passive_cps = 0
 active_cps = 1
-
-#base values of generators
 farmer_worth = 1
 lemon_worth = 5 
 orange_worth = 15
 grape_worth = 40
 lime_worth = 100
 
-clicker = Clicker(0,0)
+orange = pygame.sprite.GroupSingle()
+orange.add(Clicker())
+
+bg_surface = pygame.image.load('assets/background.jpg').convert()
 
 while True:
     for event in pygame.event.get():
-
-        #close the game
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
 
-        #check for mouse clicks
-        if event.type == pygame.MOUSEBUTTONUP:
-            pos = pygame.mouse.get_pos()
-
-
-
-    screen.blit(bg_surface,(0,0))
-    
-    all_sprites.draw(screen)
+    if game_active:   
+        screen.blit(bg_surface,(0,0))
+        orange.draw(screen)
+        orange.update()
+    else:
+        screen.fill((255,165,0))
 
     pygame.display.update()
     clock.tick(60)
