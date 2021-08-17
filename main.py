@@ -227,8 +227,8 @@ pygame.init()
 screen = pygame.display.set_mode((640,480))
 pygame.display.set_caption('Citrus Clicker')
 clock = pygame.time.Clock()
-score_font = pygame.font.Font('font/Pixeltype.ttf', 35)
-cost_font = pygame.font.Font('font/Pixeltype.ttf', 25)
+score_font = pygame.font.Font('assets/font/Pixeltype.ttf', 35)
+cost_font = pygame.font.Font('assets/font/Pixeltype.ttf', 25)
 game_active = True
 
 #Modifiable Global Variables
@@ -259,7 +259,7 @@ generators = pygame.sprite.Group()
 generators.add(Generator_Button(25,1.15,0,0,384),Generator_Button(100,1.15,1,96,384),Generator_Button(350,1.15,2,192,384),Generator_Button(1000,1.15,3,288,384),Generator_Button(3000,1.15,4,384,384))
 
 upgrades = pygame.sprite.Group()
-upgrades.add(Upgrade_Button(150,2.4,0,480,0), Upgrade_Button(350,2.4,1,560,0), Upgrade_Button(600,2.4,2,480,96), Upgrade_Button(1800,2.4,3,560,96), Upgrade_Button(4500,2.4,4,480,192), Upgrade_Button(100,3,5,480,288), Upgrade_Button(650,3,6,560,288), Upgrade_Button(5000,2.4,7,560,192), Upgrade_Button(5000000,2.4,8,480,384))
+upgrades.add(Upgrade_Button(150,2.4,0,480,0), Upgrade_Button(350,2.4,1,560,0), Upgrade_Button(600,2.4,2,480,96), Upgrade_Button(1800,2.4,3,560,96), Upgrade_Button(4500,2.4,4,480,192), Upgrade_Button(100,3,5,480,288), Upgrade_Button(650,3,6,560,288), Upgrade_Button(5000,2.4,7,560,192), Upgrade_Button(1000000000,2.4,8,480,384))
 
 bg_surface = pygame.image.load('assets/backgroundv2.jpg').convert()
 win_surface = pygame.image.load('assets/win_screen.jpg').convert()
