@@ -5,6 +5,10 @@ __pycache__/
 
 # C extensions
 *.so
+build/
+dist/
+__pycache__/
+main.spec
 
 # Distribution / packaging
 .Python
